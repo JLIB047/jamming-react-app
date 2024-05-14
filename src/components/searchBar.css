@@ -1,0 +1,35 @@
+.nav-top {
+    background-color: gray;
+    overflow: hidden; 
+}
+
+.nav-top a {
+    float: left; 
+    display: block; 
+    color: black; 
+    text-align: center; 
+    padding: 14px 16px; 
+    font-size: 17px; 
+}
+
+.nav-top .searchbar {
+    float: right; 
+}
+
+.nav-top input[type=text] {
+    padding: 6px; 
+    margin-top: 8px; 
+    font-size: 17px; 
+    border: none; 
+}
+
+.nav-top .searchbar button {
+    float: right; 
+    padding: 6px 10px; 
+    margin-top: 8px; 
+    margin-right: 16px; 
+    background: #ddd; 
+    font-size: 17px; 
+    border: none; 
+    cursor: pointer; 
+}
