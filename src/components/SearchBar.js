@@ -3,6 +3,7 @@ import './searchBar.css';
 
 function SearchBar() {
     return (
+    <>
         <div class='nav-top'>
             <a class='home' href="#home">Home</a>
             <div class='searchbar'>
@@ -12,6 +13,7 @@ function SearchBar() {
                 </form>
             </div>
         </div>
+    </>
     )
 }; 
 
