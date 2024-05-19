@@ -1,15 +1,22 @@
 import React from 'react'; 
 import './searchBar.css'; 
+import Spotify from '../utils/Spotify'; 
 
-function SearchBar() {
+
+const SearchBar = () =>  {
+
+
     return (
     <>
-        <div class='nav-top'>
-            <a class='home' href="#home">Home</a>
-            <div class='searchbar'>
+        <div className='nav-top'>
+            <a className='home' href="#home">Home</a>
+            <Spotify/> 
+            <div className='searchbar'>
                 <form>
-                    <input type='text' placeholder='Search..'></input>
-                    <button type='submit'><i class='fa fa-search'></i></button>
+                    <input type='text' placeholder='Enter a song title..'></input>
+                    <button type='submit'className="SearchButton">
+                        <i className='fa fa-search'></i>
+                    </button>
                 </form>
             </div>
         </div>
