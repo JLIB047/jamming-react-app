@@ -1,8 +1,8 @@
 import React from 'react'; 
-import SearchBar from './components/SearchBar';
-import SearchResults from './components/Results';
-import TrackList from './components/TrackList';
-
+//import SearchBar from './components/SearchBar';
+//import SearchResults from './components/Results';
+//import TrackList from './components/TrackList';
+import Spotify from './utils/Spotify'; 
  
 
 function App() {
@@ -10,9 +10,7 @@ function App() {
    
   return (
     <>
-    <SearchBar/>
-    <SearchResults/> 
-    <TrackList />
+      <Spotify />
     </>
   );
 }
