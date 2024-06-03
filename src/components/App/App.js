@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar'; 
 import SearchResults from '../SearchResults/SearchResults'; 
 import Playlist from '../Playlist/Playlist'; 
-import GetToken from '../../utils/auth'; 
+import Spotify from '../../utils/Spotify'; 
 
 
 const App = () => {
@@ -55,6 +55,19 @@ const App = () => {
     const existingTrack = playlistTracks.filter((t) => t.id !== track.id); 
     setPlaylistTracks(existingTrack); 
   };
+
+  const updatePlaylistName = (name) => {
+    setPlaylistName(name);
+  };
+
+  const savePlaylist = () => {
+    const trackURIs = playlistTracks.map((track) => track.uri);
+  }; 
+
+  const search = (term) => {
+    Spotify.search(term).then((result) => setSearchResults(result));
+    console.log(term); 
+  }
     
   
   return (
@@ -65,8 +78,8 @@ const App = () => {
       </h1>
       <div className='App'>
         {/*Add Search Bar */} 
-        <SearchBar /> 
-        <GetToken />
+        <SearchBar onSearch={search}/> 
+        
       </div>
       <div className='App-Playlist'>
        {/*Add Search Reuslts  */}
@@ -77,7 +90,9 @@ const App = () => {
       <Playlist 
             playlistName={playlistName}
             playlistTracks={playlistTracks}
-            onRemove={removeTrack} /> 
+            onRemove={removeTrack} 
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}/> 
       </div>
 
     </div>

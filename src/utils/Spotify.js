@@ -1,56 +1,57 @@
-import React, { useState } from 'react';  
-import GetToken from './auth'; 
-import axios from 'axios';
+let accessToken = ""; 
+const clientId = 'a720b7f865ed4c1e8b9659cffab3d866';
+const redirectUri = 'http://localhost:3000';    
+//const authEndpoint = "https://accounts.spotify.com/authorize";
+//const response = 'token'; 
 
 
-const Spotify = (props) => {  
-    const [ searchKey, setSearchKey ] = useState(""); 
-    const [ artists, setArtists ] = useState([]); 
+const Spotify = {  
+    getAccessToken(){
+        //first check for access token
+        if (accessToken) {
+            return accessToken; 
+        }
+        const urlAccessToken = window.location.href.match(/access_token=([^&]*)/)
+        const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/)
 
+        //second check for access token 
+        if(urlAccessToken && urlExpiresIn){
+            accessToken = urlAccessToken[1];
+            const expires_in = Number(urlExpiresIn); 
+            //setting access token to axpire at the value for expiration time 
+            window.setTimeout(() => (accessToken = ""), expires_in * 1000); 
+            window.history.pushState("Access Token", null, "/"); 
+            return accessToken; 
+        }
 
-    const searchArtists = async (e) => {
-        e.preventDefault()
-        const {data} = await axios.get("https://api.spotify.com/v1/search", {
-            headers: {
-                Authorization: `Bearer ${props.token}`
-            }, 
-            params: {
-                q: searchKey, 
-                type: "artist"
-            }
+        //third check for the access token is the first and second are both false
+        const redirect = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+        window.location = redirect;
+    },
+
+    search(term) {
+        const accessToken = Spotify.getAccessToken(); 
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+            method: 'GET', 
+            headers: { Authorization: `Bearer ${accessToken}`}, 
         })
-        setArtists(data.artists.items); 
-    }; 
-
-    const renderArtists = () => {
-        return artists.map(artist => (
-            <div key={artist.id}>
-                {artist.images.length ? <img width={"60%"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
-                {artist.name}
-            </div>
-        ))
+        .then((response) => {
+            return response.json(); 
+        })
+        .then((jsonResponse) => {
+            if(!jsonResponse.tracks){
+                return []; 
+            }
+            return jsonResponse.tracks.items.map((t) => ({
+                id: t.id, 
+                name: t.name, 
+                artist: t.artists[0].name, 
+                album: t.album.name,
+                uri: t.uri,
+            }));
+        });
     }
-
-
-
-    return (
-        <>
-        <h1>Jammin': Spotify API</h1>
-        <GetToken />
-        <div className='searchBar'>
-            <form onSubmit={searchArtists}>
-            <input type='text' placeholder='Search Artist..' onChange={e => setSearchKey(e.target.value)}></input>
-                    <button type='submit'className="SearchButton">
-                       Search
-                    </button>
-            </form>
-
-        </div>
-        <div className="renderArtist">
-            {renderArtists()}
-        </div>
-        </>
-    )
+    
 }; 
 
 export default Spotify; 
