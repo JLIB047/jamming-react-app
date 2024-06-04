@@ -1,5 +1,6 @@
 import React from 'react'; 
 import TrackList from '../TrackList/TrackList'; 
+import './playlist.css'; 
 
 
 const Playlist = (props) => {
@@ -18,7 +19,7 @@ const Playlist = (props) => {
                 userSearchResults={props.playlistTracks}
                 onRemove={props.onRemove}
                 isRemoval={true}/> 
-            <button className = 'Playlist-save' onClick={props.onSave}>SAVE TO SPOTIFY</button>
+            <button className="Playlist-save" onClick={props.onSave}>SAVE TO SPOTIFY</button>
         </div>
         
     )

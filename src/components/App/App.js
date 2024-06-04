@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; 
+import './App.css'; 
 import SearchBar from '../SearchBar/SearchBar'; 
 import SearchResults from '../SearchResults/SearchResults'; 
 import Playlist from '../Playlist/Playlist'; 
@@ -81,12 +82,12 @@ const App = () => {
       <h1>
         Jammin' 
       </h1>
-      <div className='App'>
+      <div className="App">
         {/*Add Search Bar */} 
         <SearchBar onSearch={search}/> 
         
       </div>
-      <div className='App-Playlist'>
+      <div className="App-Playlist">
        {/*Add Search Reuslts  */}
        <SearchResults 
           userSearchResults={searchResults}

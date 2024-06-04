@@ -1,7 +1,5 @@
 import React, { useState } from 'react'; 
-// import axios from 'axios'; 
 import './searchBar.css'; 
-//import Spotify, {token} from '../utils/Spotify'; 
 
 
 const SearchBar = (props) =>  {

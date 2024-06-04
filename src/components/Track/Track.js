@@ -1,4 +1,5 @@
 import React from 'react'; 
+import './track.css'; 
 
 const Track = (props) => {
     const renderAction=()=> {
@@ -23,7 +24,7 @@ const Track = (props) => {
 
     return (
         <div className='Track'>
-            <div className='Track-info'>
+            <div className='Track-information'>
             {/* Track Name h3 */}
             <h3>{props.track.name}</h3>
             {/* Track artist / album p */}

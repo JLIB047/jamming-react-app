@@ -1,11 +1,12 @@
 import React from 'react'; 
 import TrackList from '../TrackList/TrackList'; 
+import './searchResults.css'; 
 
 
 const SearchResults = (props) => {
 
     return (
-        <div className='Search-Results'>
+        <div className='SearchResults'>
             <h2>Results</h2>
             {/*Add TrackList components */}
             <TrackList 
